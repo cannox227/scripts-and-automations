@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Dummy API credentials
+**/credentials.json
+
+# Mac trash
+**/.DS_Store

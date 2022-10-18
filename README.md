@@ -1,2 +1,5 @@
-# scripts-and-automations
-Personal folder where you can find some scripts or automations that I commonly use
+# Scripts and automation
+
+In this repo I keep some basic scripts and tool that I use to automate some recurrent tasks.
+
+
