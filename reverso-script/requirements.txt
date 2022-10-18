@@ -1,0 +1,2 @@
+gspread==5.6.0
+reverso_context_api==0.5
