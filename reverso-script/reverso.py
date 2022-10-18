@@ -43,12 +43,10 @@ try:
                 gc = gspread.service_account(filename="credentials.json")
                 sh = gc.open_by_key(file_id)
                 sh.sheet1.append_row([word, sheet_buffer])
+                print("\nTraductions written on the google sheet")
             else:
                 raise Exception("No file id provided")
 
 
 except Exception as e:
     print(f"Error: {e}")
-
-except Exception as e:
-    print(f"Error:{e}")
