@@ -1,0 +1,1 @@
+python3 reverso.py --word="$1" --depth=10
