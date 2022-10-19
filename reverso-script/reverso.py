@@ -42,8 +42,8 @@ try:
             if file_id != None:
                 pass
                 gsheet = gsheets_wrapped_api.Gsheet_Api()
-                gsheet.write_on_sheet(file_id, word, sheet_buffer)
-                print("\nTraductions written on the google sheet")
+                if gsheet.write_on_sheet("key", file_id, word, sheet_buffer):
+                    print("\nTraductions written on the google sheet")
             else:
                 raise Exception("No file id provided")
 
