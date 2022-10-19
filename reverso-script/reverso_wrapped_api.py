@@ -17,3 +17,15 @@ class Reverso_Api():
 
     def get_translations(self, word, depth=MAX_DEPTH):
         return list(self.client.get_translations(word))[:depth]
+
+    def print_translations(self, word, depth=MAX_DEPTH):
+        for i in self.get_translations(word, depth):
+            print(i)
+
+    def get_separated_translations(self, word, depth=MAX_DEPTH):
+        # output like: "a / b / c "
+        self.sheet_buffer = ""
+        for i in self.get_translations(word, depth):
+            self.sheet_buffer += i + " / "
+        self.sheet_buffer = self.sheet_buffer[:len(self.sheet_buffer)-2]
+        return self.sheet_buffer
