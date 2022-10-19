@@ -5,6 +5,10 @@ class Gsheet_Api():
     def __init__(self, credentials="credentials.json"):
         self.gc = gspread.service_account(filename=credentials)
 
+    def create_sheet(self, title):
+        self.sh = self.gc.create(title)
+        return self.sh
+
     def is_a_g_sheet(self, link_type, file_id):
         # link type can be key, url or title
         try:
