@@ -1,7 +1,6 @@
 import argparse
-from logging import raiseExceptions
-from reverso_context_api import Client
-import gspread
+import reverso_wrapped_api
+import gsheets_wrapped_api
 
 parser = argparse.ArgumentParser(
     description='A simple reverso translator and google sheet automatic appender', epilog="Example: python3 reverso.py --source=en --dest=it --word=Unabashed --depth=6 --write=y --file_id=...")
@@ -27,8 +26,10 @@ try:
     print(
         f"\nTranslating from {source_lang} to {destination_lang} the word: {word}\n")
 
-    client = Client(source_lang, destination_lang)
-    translated_words = list(client.get_translations(word))
+    reverso_api = reverso_wrapped_api.Reverso_Api(
+        source_lang, destination_lang)
+    client = reverso_api.get_client()
+    translated_words = reverso_api.get_translations(word, int(args["depth"]))
     if len(translated_words) == 0:
         print("No traduction available")
     else:
@@ -40,9 +41,8 @@ try:
             sheet_buffer = sheet_buffer[:len(sheet_buffer)-2]
             if file_id != None:
                 pass
-                gc = gspread.service_account(filename="credentials.json")
-                sh = gc.open_by_key(file_id)
-                sh.sheet1.append_row([word, sheet_buffer])
+                gsheet = gsheets_wrapped_api.Gsheet_Api()
+                gsheet.write_on_sheet(file_id, word, sheet_buffer)
                 print("\nTraductions written on the google sheet")
             else:
                 raise Exception("No file id provided")
