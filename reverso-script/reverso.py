@@ -1,6 +1,9 @@
 import argparse
-import reverso_wrapped_api
-import gsheets_wrapped_api
+import sys 
+import os
+sys.path.append(os.getcwd() + os.path.abspath("/api/"))
+from api.reverso_wrapped_api import *
+from api.gsheets_wrapped_api import *
 
 parser = argparse.ArgumentParser(
     description='A simple reverso translator and google sheet automatic appender', epilog="Example: python3 reverso.py --source=en --dest=it --word=Unabashed --depth=6 --write=y --file_id=...")
@@ -26,7 +29,7 @@ try:
     print(
         f"\nTranslating from {source_lang} to {destination_lang} the word: {word}\n")
 
-    reverso_api = reverso_wrapped_api.Reverso_Api(
+    reverso_api = Reverso_Api(
         source_lang, destination_lang)
     client = reverso_api.get_client()
     translated_words = reverso_api.get_translations(word, int(args["depth"]))
@@ -41,7 +44,7 @@ try:
             sheet_buffer = sheet_buffer[:len(sheet_buffer)-2]
             if file_id != None:
                 pass
-                gsheet = gsheets_wrapped_api.Gsheet_Api()
+                gsheet = Gsheet_Api()
                 if gsheet.write_on_sheet("key", file_id, word, sheet_buffer):
                     print("\nTraductions written on the google sheet")
             else:

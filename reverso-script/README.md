@@ -48,3 +48,6 @@ Traductions written on the google sheet
 ## Libraries
 - [reverso_context_api](https://github.com/flagist0/reverso_context_api)
 - [gspread](https://github.com/burnash/gspread)
+
+## Note
+The Gsheet backend it's now used in the [Lexibot project](https://github.com/tollsimy/lexibot) made my man [Tollsimy](https://github.com/tollsimy) and I !
