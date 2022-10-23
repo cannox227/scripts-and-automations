@@ -11,6 +11,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--file_id", help="Google sheet file id", required=True)
 parser.add_argument("--row", help="Row number you want to get", required=False)
 parser.add_argument("--col", help="Col number you want to get based on the row", required=False)
+parser.add_argument("--find", help="Find a w", required=False)
 
 args = vars(parser.parse_args())
 
@@ -28,6 +29,15 @@ else:
         Total rows: {gsheet.get_rows_number()}\r
         Total cols: {gsheet.get_cols_number()}\r
         Header: {gsheet.get_sheet_header()}\n""")
+
+        #gsheet.write_custom_row(["en","it","meaning"])
+        if(args["find"]!=None):
+            print(f"Searching for {args['find']}...")
+            res = (gsheet.find_word(args["find"]))
+            if res[0]:
+                print(f"Found word:{args['find']} at row {gsheet.get_cell_row(res[1])} and col {gsheet.get_cell_col(res[1])}")
+            else:
+                print("Word not found")
         if(args["row"] == None):
             print(f'Printing a random row: {gsheet.get_random_row()}')
             print(f'Print a random column: {gsheet.get_random_column()}')

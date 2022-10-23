@@ -65,8 +65,41 @@ class Gsheet_Api():
             self.sh.sheet1.append_row([word, traductions])
             return True
         else:
-            print("Error: the link is not a google sheet")
+            print("Error: google sheet not found")
             return False
+
+    def write_custom_row(self, row: list):
+        if self.sh != None:
+            self.sh.sheet1.append_row(row)
+            return True
+        else:
+            print("Error: google sheet not found")
+            return False
+    
+    def find_word(self, word):
+        # return False wheter not found
+        # otherwise return a tuple with True and the cell object
+        if self.sh != None:
+            cell = self.sh.sheet1.find(word)
+            if cell:
+                return (True,cell)
+            else:
+                return False
+        else:
+            print("Error: google sheet not found")
+            return False
+    
+    def get_cell_row(self, cell):
+        if self.sh != None:
+            return cell.row
+        else:
+            return None
+
+    def get_cell_col(self, cell):
+        if self.sh != None:
+            return cell.col
+        else:
+            return None
 
     def get_rows_number(self):
         # get_last_row_index
