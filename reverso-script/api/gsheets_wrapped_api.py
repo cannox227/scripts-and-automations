@@ -8,8 +8,14 @@ import gspread
 # sorry :(
 
 class Gsheet_Api():
-    def __init__(self, credentials="credentials.json"):
-        self.gc = gspread.service_account(filename=credentials)
+    def __init__(self, credentials="credentials.json", cred_type="filename"):
+        if(cred_type == "filename"):
+            self.gc = gspread.service_account(filename=credentials)
+        elif(cred_type == "dict"):
+            self.gc = gspread.service_account_from_dict(credentials)
+        else:
+            print("Error: supported credential types are 'filename' and 'dict'")
+            raise ValueError("Error: supported credential types are 'filename' and 'dict'")
         self.first_row_index = 1
         self.sh = None
     
